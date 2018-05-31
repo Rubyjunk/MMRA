@@ -22,7 +22,9 @@
     "default_icon": "icon.png"
   },
   "permissions": [
-    "storage", "https://*/*"
+    "storage", 
+	"https://*/*",
+	"cookies"
   ],
   "content_scripts": [
     {

@@ -76,6 +76,10 @@ var shrinkHeaderImages = function() {
 	}
 }
 
+var pseudoPremium = function() {
+	document.cookie = 'mpids=; path=/;';
+}
+
 var observer = new MutationObserver(function(mutations){
 	mutations.forEach(function(){
 		makeReadable();
@@ -83,14 +87,14 @@ var observer = new MutationObserver(function(mutations){
 	});	
 });
 
+
 var config = {attributes: true};
 
 // This extension runs on all domains so it can Make Medium Readable Again even for publications on custom domains.
 // Here we make sure the code only runs on Medium sites.
 if (document.querySelector('head meta[property="al:ios:app_name"][content="medium" i]')) {
 	makeReadable();
-	shrinkHeaderImages();
-
+	
 	chrome.storage.sync.get(null, function(items) {
 		if (items.hideDickbar) {
 			hideDickbar();
@@ -100,6 +104,12 @@ if (document.querySelector('head meta[property="al:ios:app_name"][content="mediu
 		}
 		if (items.hideHighlightMenu) {
 			hideHighlightMenu();
+		}
+		if (items.hideHeaders) {
+			shrinkHeaderImages();
+		}
+		if (items.pseudoPremium) {
+			pseudoPremium();
 		}
 	});
 
